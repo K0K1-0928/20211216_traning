@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-RestApiApplication<rest_api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "jp.evolveit.kouki_murakami.rest_api.RestApiApplication",
+            "projectName": "rest_api",
+            "args": ""
+        }
+    ]
+}
