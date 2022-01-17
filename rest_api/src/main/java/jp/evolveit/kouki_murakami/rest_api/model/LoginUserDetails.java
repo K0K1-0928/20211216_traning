@@ -1,5 +1,6 @@
 package jp.evolveit.kouki_murakami.rest_api.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,7 @@ public class LoginUserDetails implements UserDetails {
     private final List<? extends GrantedAuthority> authorities = Collections
             .unmodifiableList(List.of(new SimpleGrantedAuthority("USER")));
 
+    @Autowired
     public LoginUserDetails(User user) {
         this.user = user;
     }
@@ -35,25 +37,25 @@ public class LoginUserDetails implements UserDetails {
     @Override
     public boolean isAccountNonExpired() {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
 }
