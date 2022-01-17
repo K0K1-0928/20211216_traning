@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -21,10 +22,6 @@ public class JwtProvider {
     /** トークンの有効期限(秒) */
     private static final long JWT_TOKEN_VALIDITY = 1_800L;
 
-    /** 署名用の共通鍵 */
-    @Value("${jwt.secret}")
-    private String secret;
-
     private final LoginUserDetailsService loginUserDetailsService;
     private final JwtParser jwtParser;
     private final JwtBuilder jwtBuilder;
@@ -32,10 +29,9 @@ public class JwtProvider {
     @Autowired
     public JwtProvider(LoginUserDetailsService loginUserDetailsService, @Value("${jwt.secret}") String secret) {
         this.loginUserDetailsService = loginUserDetailsService;
-        this.secret = secret;
 
         /* 署名キーの作成 */
-        byte[] keyBytes = Decoders.BASE64.decode(secret);
+        byte[] keyBytes = secret.getBytes(StandardCharsets.UTF_8);
         Key key = Keys.hmacShaKeyFor(keyBytes);
 
         /* 毎回生成しなくて済むように、フィールドに持たせる */
